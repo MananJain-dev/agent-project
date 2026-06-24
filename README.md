@@ -191,7 +191,7 @@ Tell me about available services
 B.Tech, Computer Science Engineering
 Indian Institute of Technology Jammu
 
-GitHub: https://github.com/MananJ-cyber
+GitHub: https://github.com/MananJain-dev
 LinkedIn: https://linkedin.com/in/manan-jain-b163a6321
 
 ```
