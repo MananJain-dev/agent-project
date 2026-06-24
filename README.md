@@ -1,90 +1,198 @@
 # LLM Tool-Calling Agent System
 
-This project is a backend application that uses a language model to answer user queries by calling external tools when needed. It supports tasks like fetching weather data or retrieving predefined information.
+An AI-powered backend system that enables Large Language Models (LLMs) to dynamically invoke external tools, retrieve real-time information, and generate context-aware responses. The project demonstrates agentic workflows using LangChain, function calling, and API integrations.
 
 ---
 
-## What this project does
+## Overview
 
-- Takes user input through an API
-- Uses an LLM to understand the query
-- Decides whether a tool needs to be called
-- Executes the tool (e.g., weather API)
-- Returns the final response
+Traditional LLMs are limited to the information available within their training data. This project extends an LLM's capabilities by allowing it to:
 
----
+* Understand user intent
+* Decide when external information is required
+* Select and invoke the appropriate tool
+* Process tool outputs
+* Generate a final natural-language response
 
-## Tech used
-
-- Node.js and Express for backend
-- LangChain for building the agent
-- Google Gemini API as the language model
-- OpenWeather API for real-time data
-- Zod for input validation
+The system currently supports weather retrieval and structured information lookup, while maintaining a modular architecture for adding new tools.
 
 ---
 
-## Project files
+## Features
 
-- `server.js` → main backend with agent and API routes  
-- `weather.js` → separate script where LangGraph-based agent was explored  
-- `.env` → stores API keys  
+* Agentic decision-making using LangChain
+* Dynamic tool invocation based on user queries
+* Real-time weather information through OpenWeather API
+* Function-calling workflow with Gemini models
+* Input validation using Zod
+* Modular design for adding additional tools
+* REST API interface for external applications
 
 ---
 
+## Architecture
+
+```text
+User Query
+     │
+     ▼
+Express API Endpoint
+     │
+     ▼
+LangChain Agent
+     │
+     ├── Direct Response
+     │
+     └── Tool Selection
+             │
+             ▼
+       External Tool
+             │
+             ▼
+       Tool Output
+             │
+             ▼
+      Final Response
+```
+
+---
+
+## Tech Stack
+
+### Backend
+
+* Node.js
+* Express.js
+
+### AI & Agent Framework
+
+* LangChain
+* Google Gemini API
+
+### External Services
+
+* OpenWeather API
+
+### Validation & Utilities
+
+* Zod
+* dotenv
+
+---
+
+## Project Structure
+
+```text
+agent-project/
+│
+├── server.js          # Main Express server and agent workflow
+├── weather.js         # LangGraph experimentation and weather workflows
+├── package.json
+├── .env
+└── README.md
+```
+
+---
+
+## Installation
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/MananJ-cyber/agent-project.git
 
 cd agent-project
+```
 
+### 2. Install Dependencies
 
-2. Install dependencies
-
+```bash
 npm install
+```
 
+### 3. Configure Environment Variables
 
-3. Create a `.env` file and add:
+Create a `.env` file:
 
-GOOGLE_API_KEY=your_key_here
-OPENWEATHER_API_KEY=your_key_here
+```env
+GOOGLE_API_KEY=your_google_api_key
+OPENWEATHER_API_KEY=your_openweather_api_key
+```
 
+### 4. Start the Server
 
-4. Start the server
-
+```bash
 node server.js
-
-
----
-
-## Example queries
-
-- "What is the weather in Jalandhar?"
-- "Get menu for Pasta Palace"
+```
 
 ---
 
-## Notes
+## Example Queries
 
-- The agent is configured to limit iterations to avoid loops
-- If the agent stops early, the last tool output is returned
-- A separate file (`weather.js`) was used to experiment with LangGraph
+### Weather Queries
+
+```text
+What is the weather in Jalandhar?
+```
+
+```text
+Will it rain tomorrow in Delhi?
+```
+
+### Information Retrieval
+
+```text
+Get menu for Pasta Palace
+```
+
+```text
+Tell me about available services
+```
 
 ---
 
-## What I learned
+## Agent Workflow
 
-- How LLM agents decide when to call tools
-- Handling API responses inside an agent workflow
-- Managing execution flow to avoid repeated loops
-- Structuring backend services around LLMs
+1. User sends a query through the API.
+2. Gemini interprets the request.
+3. LangChain determines whether a tool call is required.
+4. Appropriate tool executes.
+5. Tool output is returned to the model.
+6. Model generates the final response.
 
 ---
 
-## Possible improvements
+## Key Learnings
 
-- Add a frontend interface
-- Support more tools dynamically
-- Deploy the project online
+* Building agentic AI systems with LangChain
+* Implementing tool-calling and function execution workflows
+* Integrating real-time APIs with LLMs
+* Managing agent execution loops and stopping criteria
+* Designing modular AI-powered backend services
 
-## How to run
+---
 
-1. Clone the repository
+## Future Improvements
+
+* Support for multiple dynamic tools
+* Database integration for persistent memory
+* Multi-step planning agents
+* Frontend dashboard for interaction
+* Docker containerization
+* Cloud deployment (AWS/GCP/Azure)
+* Authentication and rate limiting
+
+---
+
+## Author
+
+**Manan Jain**
+
+B.Tech, Computer Science Engineering
+Indian Institute of Technology Jammu
+
+GitHub: https://github.com/MananJ-cyber
+LinkedIn: https://linkedin.com/in/manan-jain-b163a6321
+
+```
+```
