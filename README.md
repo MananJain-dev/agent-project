@@ -5,76 +5,85 @@
 ![LangChain](https://img.shields.io/badge/LangChain-Agent-orange)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-An intelligent weather assistant built using **React**, **Node.js**, **LangChain**, and **OpenWeather API**. Unlike a traditional chatbot, this application uses an AI agent capable of selecting the appropriate tool based on the user's query, enabling both current weather retrieval and weather forecasting.
+An AI-powered Weather Assistant built using **React**, **Node.js**, **Express**, **LangChain**, and the **OpenWeather API**. The application leverages a LangChain Agent capable of automatically selecting the appropriate tool based on user intent, enabling intelligent conversations about both **current weather** and **weather forecasts**.
 
 ---
 
-## Features
+## ✨ Features
 
-- 🌤️ Current weather information
+- 🌤️ Real-time weather information
 - 📅 5-day weather forecast
 - 🤖 AI-powered conversational interface
-- 🧠 LangChain Agent with tool calling
-- ⚡ Automatic tool selection based on user intent
-- 💬 Chat interface built with React
-- 📊 Interactive weather card displaying current conditions
-- 🌍 Supports weather queries for cities worldwide
+- 🧠 LangChain Agent with intelligent tool selection
+- ⚡ Automatic routing between Current Weather and Forecast tools
+- 💬 Modern React chat interface
+- 📊 Dynamic weather card for current conditions
+- 🌍 Worldwide city support
+- 🔄 Markdown-supported AI responses
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 ### Frontend
 - React
 - Vite
 - Tailwind CSS
 - Axios
+- React Markdown
 
 ### Backend
 - Node.js
 - Express.js
 - LangChain
-- OpenRouter LLM
+- OpenRouter (LLM)
 - OpenWeather API
 
 ---
 
-## Project Architecture
+# 🏗️ Project Architecture
 
+```text
+                    React Frontend
+                          │
+                          ▼
+                  Express Backend API
+                          │
+                          ▼
+                  LangChain AI Agent
+                 ┌─────────┴─────────┐
+                 │                   │
+      Current Weather Tool     Forecast Tool
+                 │                   │
+                 ▼                   ▼
+       OpenWeather Current API   OpenWeather Forecast API
 ```
-                 React Frontend
-                       │
-                       ▼
-               Express Backend API
-                       │
-                       ▼
-               LangChain AI Agent
-              ┌────────┴────────┐
-              │                 │
-      Current Weather Tool   Forecast Tool
-              │                 │
-      OpenWeather API     OpenWeather Forecast API
-```
 
-The AI agent automatically determines which tool to invoke depending on the user's request.
+The AI Agent automatically determines which tool to invoke depending on the user's request.
 
-Examples:
+### Examples
 
-- "Weather in Delhi" → Current Weather Tool
-- "Humidity in Mumbai" → Current Weather Tool
-- "Will it rain tomorrow?" → Forecast Tool
-- "Weekend forecast for London" → Forecast Tool
+| User Query | Tool Selected |
+|------------|---------------|
+| Weather in Delhi | Current Weather |
+| Humidity in Mumbai | Current Weather |
+| Temperature in Bengaluru | Current Weather |
+| Will it rain tomorrow? | Forecast |
+| Weekend forecast for London | Forecast |
+| Snowfall in Switzerland next week | Forecast |
 
 ---
 
-## Folder Structure
+# 📁 Folder Structure
 
-```
+```text
 weather_assistant/
 │
 ├── client/
 │   ├── src/
-│   ├── public/
+│   │   ├── components/
+│   │   ├── services/
+│   │   └── ...
 │   └── ...
 │
 ├── server/
@@ -91,19 +100,19 @@ weather_assistant/
 
 ---
 
-## Installation
+# 🚀 Installation
 
-### Clone the repository
+## Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/agent-project.git
+git clone https://github.com/MananJain-dev/agent-project.git
 
 cd agent-project
 ```
 
 ---
 
-### Backend Setup
+## Backend Setup
 
 ```bash
 cd server
@@ -111,12 +120,12 @@ cd server
 npm install
 ```
 
-Create a `.env` file:
+Create a `.env` file inside the `server` directory.
 
 ```env
-OPENWEATHER_API_KEY=YOUR_OPENWEATHER_KEY
+OPENWEATHER_API_KEY=YOUR_OPENWEATHER_API_KEY
 
-OPENROUTER_API_KEY=YOUR_OPENROUTER_KEY
+OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
 
 MODEL=qwen/qwen3-235b-a22b
 
@@ -133,7 +142,7 @@ npm run dev
 
 ---
 
-### Frontend Setup
+## Frontend Setup
 
 ```bash
 cd client
@@ -143,73 +152,98 @@ npm install
 npm run dev
 ```
 
-The frontend runs on
+The application will be available at:
 
-```
+Frontend
+
+```text
 http://localhost:5173
 ```
 
-The backend runs on
+Backend
 
-```
+```text
 http://localhost:5000
 ```
 
 ---
 
-## AI Agent Workflow
+# 🤖 AI Agent Workflow
 
-```
-User Question
-      │
-      ▼
-LangChain Agent
-      │
-      ├──────────────┐
-      │              │
-Current Weather   Forecast Tool
-      │              │
-      ▼              ▼
-OpenWeather     Forecast API
-      │              │
-      └──────┬───────┘
-             ▼
+```text
+              User Query
+                   │
+                   ▼
+          LangChain Agent
+                   │
+      ┌────────────┴────────────┐
+      │                         │
+Current Weather Tool      Forecast Tool
+      │                         │
+      ▼                         ▼
+Current Weather API      Forecast API
+      │                         │
+      └────────────┬────────────┘
+                   ▼
       Natural Language Response
 ```
 
+The agent reasons about the user's intent and invokes the appropriate tool automatically.
+
 ---
 
-## Example Questions
+# 💬 Example Queries
 
 - Weather in Bengaluru
 - Temperature in Delhi
 - Humidity in Mumbai
 - Is it windy in Chennai?
-- Will it rain tomorrow in London?
-- Weekend forecast for Paris
+- Weather in New York
+- Forecast for London
+- Weekend weather in Paris
+- Will it rain tomorrow in Delhi?
 - Will it snow in Switzerland?
 
 ---
 
-## Future Improvements
+# 📸 Screenshots
 
-- Air Quality Index (AQI)
-- UV Index
-- Weather Alerts
-- Geolocation support
-- Weather history
-- Hourly forecast visualization
-- Voice interaction
-- Weather maps
+### Chat Interface
+
+<img width="752" height="780" alt="AI Weather Assistant" src="https://github.com/user-attachments/assets/e264a915-620c-489f-948e-81b7ed1aa04b" />
 
 ---
 
-## Screenshots
+# 🚀 Future Improvements
 
-<img width="752" height="780" alt="image" src="https://github.com/user-attachments/assets/e264a915-620c-489f-948e-81b7ed1aa04b" />
+- 🌫️ Air Quality Index (AQI)
+- ☀️ UV Index
+- 🚨 Weather Alerts
+- 📍 Geolocation Support
+- 🗺️ Interactive Weather Maps
+- 📈 Hourly Forecast Visualization
+- 🎙️ Voice-based Interaction
+- 📱 Mobile Responsive Enhancements
 
 ---
 
-## License
+# 🤝 Contributing
 
-MIT License
+Contributions, feature requests, and suggestions are welcome.
+
+If you'd like to improve the project, feel free to fork the repository, create a new branch, and submit a Pull Request.
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
+---
+
+# 👨‍💻 Author
+
+**Manan Jain**
+
+- GitHub: https://github.com/MananJain-dev
+- LinkedIn: www.linkedin.com/in/manan-jain-b163a6321
