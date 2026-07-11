@@ -201,7 +201,7 @@ OpenWeather     Forecast API
 
 ## Screenshots
 
-> Add screenshots of the chat interface and weather card here.
+<img width="752" height="780" alt="image" src="https://github.com/user-attachments/assets/e264a915-620c-489f-948e-81b7ed1aa04b" />
 
 ---
 
