@@ -1,5 +1,10 @@
 # 🌦️ AI Weather Assistant
 
+![React](https://img.shields.io/badge/React-19-blue)
+![Node.js](https://img.shields.io/badge/Node.js-Express-green)
+![LangChain](https://img.shields.io/badge/LangChain-Agent-orange)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 An intelligent weather assistant built using **React**, **Node.js**, **LangChain**, and **OpenWeather API**. Unlike a traditional chatbot, this application uses an AI agent capable of selecting the appropriate tool based on the user's query, enabling both current weather retrieval and weather forecasting.
 
 ---
