@@ -7,6 +7,8 @@
 
 An AI-powered Weather Assistant built using **React**, **Node.js**, **Express**, **LangChain**, and the **OpenWeather API**. The application leverages a LangChain Agent capable of automatically selecting the appropriate tool based on user intent, enabling intelligent conversations about both **current weather** and **weather forecasts**.
 
+Live Demo - https://agent-project-vert.vercel.app/
+
 ---
 
 ## ✨ Features
