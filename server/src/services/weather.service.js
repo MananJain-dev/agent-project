@@ -2,12 +2,16 @@ import axios from "axios";
 import { env } from "../config/env.js";
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
-function formatTime(timestamp) {
-    return new Date(timestamp * 1000).toLocaleTimeString("en-IN", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-    });
+function formatTime(timestamp, timezoneOffset) {
+    return new Date((timestamp + timezoneOffset) * 1000).toLocaleTimeString(
+        "en-IN",
+        {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+            timeZone: "UTC",
+        }
+    );
 }
 
 export async function getCurrentWeather(city) {
@@ -32,8 +36,8 @@ export async function getCurrentWeather(city) {
             windSpeed: data.wind.speed,
             description: data.weather[0].description,
             icon: data.weather[0].icon,
-            sunrise: formatTime(data.sys.sunrise),
-            sunset: formatTime(data.sys.sunset)
+            sunrise: formatTime(data.sys.sunrise, data.timezone),
+            sunset: formatTime(data.sys.sunset, data.timezone)
         };
     } catch (error) {
         if (error.response?.status === 404) {
