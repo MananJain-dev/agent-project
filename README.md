@@ -32,7 +32,7 @@ Live Demo - https://agent-project-vert.vercel.app/
 - Vite
 - Tailwind CSS
 - Axios
-- 
+   
 ### Backend
 - Node.js
 - Express.js
