@@ -11,6 +11,7 @@ export async function getForecast(city) {
                 appid: env.OPENWEATHER_API_KEY,
                 units: "metric",
             },
+            timeout: 8000,
         });
 
         const forecast = response.data.list.map((item) => ({

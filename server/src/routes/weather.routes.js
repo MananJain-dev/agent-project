@@ -7,14 +7,27 @@ router.get("/", async (req, res) => {
     try {
         const { city } = req.query;
 
-        const weather = await getCurrentWeather(city);
+        if (
+            typeof city !== "string" ||
+            city.trim().length === 0 ||
+            city.length > 100
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: "A valid city is required.",
+            });
+        }
+
+        const weather = await getCurrentWeather(city.trim());
 
         res.json(weather);
 
     } catch (error) {
+        console.error(error);
+        
         res.status(500).json({
             success: false,
-            message: error.message,
+            message: "Something went wrong. Please try again.",
         });
     }
 });

@@ -22,6 +22,7 @@ export async function getCurrentWeather(city) {
                 appid: env.OPENWEATHER_API_KEY,
                 units: "metric",
             },
+            timeout: 8000,
         });
 
         const data = response.data;

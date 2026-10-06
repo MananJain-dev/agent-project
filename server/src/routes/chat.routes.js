@@ -1,32 +1,38 @@
 import express from "express";
+import { z } from "zod";
 import weatherAgent from "../agents/weather.agent.js";
 
 const router = express.Router();
 
+const messageSchema = z.object({
+    role: z.enum(["user", "assistant", "system"]),
+    content: z.string().min(1).max(4000),
+});
+
+const chatRequestSchema = z.object({
+    messages: z
+        .array(messageSchema)
+        .min(1)
+        .max(15),
+});
+
 router.post("/", async (req, res) => {
     try {
-        const { messages } = req.body;
+        const parsed = chatRequestSchema.safeParse(req.body);
 
-        if (!messages || !Array.isArray(messages)) {
+        if (!parsed.success) {
             return res.status(400).json({
                 success: false,
-                message: "Messages array is required.",
+                message: "Invalid chat request.",
             });
         }
+
+        const { messages } = parsed.data;
 
         const result = await weatherAgent.invoke({
             messages,
         });
-        console.log("============== Agent Messages ==============");
 
-        console.log(
-            result.messages.map((m) => ({
-                type: m.type,
-                content: m.content,
-            }))
-        );
-
-        console.log("============================================");
         const toolMessage = [...result.messages]
             .reverse()
             .find((message) => message.type === "tool");
@@ -34,26 +40,30 @@ router.post("/", async (req, res) => {
         let weather = null;
 
         if (
-            toolMessage &&
-            toolMessage.name === "get_current_weather"
+            toolMessage?.name === "get_current_weather"
         ) {
-            weather = JSON.parse(toolMessage.content);
+            try {
+                weather = JSON.parse(toolMessage.content);
+            } catch {
+                weather = null;
+            }
         }
 
-        const lastMessage = result.messages[result.messages.length - 1];
+        const lastMessage =
+            result.messages[result.messages.length - 1];
 
-        res.json({
+        return res.json({
             success: true,
-            message: lastMessage.content,
+            message: lastMessage?.content ?? "",
             weather,
         });
 
     } catch (error) {
-        console.error(error);
+        console.error("Chat error:", error);
 
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
-            message: error.message,
+            message: "Unable to process your request.",
         });
     }
 });
